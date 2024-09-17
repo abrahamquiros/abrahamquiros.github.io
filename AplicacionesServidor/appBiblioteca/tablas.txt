@@ -1,0 +1,16 @@
+-- Crear la tabla t_genero si no existe
+CREATE TABLE IF NOT EXISTS t_genero (
+    id_genero INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_genero VARCHAR(255) NOT NULL
+);
+
+-- Insertar valores de ejemplo en la tabla t_genero
+INSERT INTO t_genero (nombre_genero) VALUES ('Ficción'), ('Misterio'), ('Ciencia Ficción'), ('Romance'), ('Aventura');
+
+CREATE TABLE t_libros (
+    id_libro INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_libro VARCHAR(255) NOT NULL,
+    autor VARCHAR(255) NOT NULL,
+    id_genero INT,
+    FOREIGN KEY (id_genero) REFERENCES t_genero(id_genero)
+);
