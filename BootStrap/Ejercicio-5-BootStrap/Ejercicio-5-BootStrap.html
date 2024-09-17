@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        .row div[class*='col'] { padding: 10px; border: 1px solid;}  
+        .imagenEstatica{
+            background-image: url('./arboleda.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            /* background-position: ; */
+        }  
+        .portada{
+            text-align: center;
+            height: 500px;
+            padding-top: 35px;
+        }
+
+        .contenido{
+            padding-top: 95px;
+            font-weight: bold;
+        }
+        .boton{
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            background-color: rgb(0, 31, 63);
+        }
+        .fondoGris{
+            background-color: rgb(39, 43, 48);
+            color: white;
+        }
+        .titulo{
+            color: rgb(0, 31, 63);
+        }
+        .imagenCubo{
+            padding-left: 50px;
+        }
+        .imagenCircular{
+            width: 100px; 
+            height: 100px; 
+            border-radius: 50%;
+            object-fit: cover; /* asegura que la imagen se ajuste correctamente al contenedor circular */
+        }
+        .centrar{
+            text-align: center;
+        }
+
+    </style>  
+</head>
+<body>
+    <div class="container">
+        <div class="container-fluid imagenEstatica">
+            <div class="row nav">
+                <div class="col-10">
+                    <p>DAW2</p>
+                </div>
+                <div class="col-1 sombra">
+                    <p><a href="">Home</a></p>
+                </div>
+                <div class="col-1 sombra">
+                    <a href="">Contacts</a>
+                </div>
+            </div>
+            <div class="row portada">
+                <div class="container-fluid contenido">
+                    <h1>La Arboleda</h1>
+                    <p>Departamento Informatica y Comunicaciones, todo para tu información Técnica</p>
+                    <input type="submit" class="boton" value="Pulsa">
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid fondoGris">
+            <div class="row contenidoDiw">
+                <div class="col-6">
+                    <img src="./diw.PNG" class="imagenCubo" alt="" width="350px" height="300px">
+                </div>
+                <div class="col-6">
+                    <h1 class="titulo">DIW</h1>
+                    <h3>Desarrollo Interfaces Web</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, expedita tenetur ullam eligendi officiis
+                        labore minus repellendus neque asperiores fugiat nobis obcaecati? Quidem iure earum facilis suscipit
+                        a corporis ut.
+                        recusandae fugiat. Illo asperiores minus nisi provident.
+                        Eveniet quas ducimus repellat, dolore, distinctio labore possimus magnam repellendus, inventore amet
+                        quod cum ratione nulla aliquid minus esse est nobis iste facere pariatur nam corporis fugit. Alias,
+                        atque commodi?</p>
+                </div>
+            </div>
+            <div class="row contenidoDwec">
+                <div class="col-6">
+                    <h1 class="titulo">DWEC</h1>
+                    <h3>Desarrollo Web Entorno Cliente</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, expedita tenetur ullam eligendi officiis
+                        labore minus repellendus neque asperiores fugiat nobis obcaecati? Quidem iure earum facilis suscipit
+                        a corporis ut.
+                        recusandae fugiat. Illo asperiores minus nisi provident.
+                        Eveniet quas ducimus repellat, dolore, distinctio labore possimus magnam repellendus, inventore amet
+                        quod cum ratione nulla aliquid minus esse est nobis iste facere pariatur nam corporis fugit. Alias,
+                        atque commodi?</p>     
+                </div>
+                <div class="col-6">
+                    <img src="./dewc.png" class="imagenCubo" alt="">
+                </div>
+            </div>
+            <div class="row team">
+                <div class="col-12 centrar">
+                    <h1 class="titulo">Team</h1>
+                    <p>We are a group of skilled individuals</p>
+                </div>
+
+                <div class="col-4 centrar">
+                    <img src="./tuesday_youngsf-800x288.jpg" alt="" class="imagenCircular">
+                    <p>John Doe</p>
+                </div>
+                <div class="col-4 centrar">
+                    <img src="./tuesday_youngsf-800x288.jpg" alt="" class="imagenCircular">
+                    <p>John Doe</p>
+                </div>
+                <div class="col-4 centrar">
+                    <img src="./tuesday_youngsf-800x288.jpg" alt="" class="imagenCircular">
+                    <p>John Doe</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
