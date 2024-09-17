@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        /* .row div[class*='col'] {padding: 10px; border: 1px solid;} */
+        @font-face {
+            font-family: fuenteExterna;
+            src: url(./assets/fuentes/GlacialIndifference-Bold.otf);
+        }
+        body{
+            font-family: fuenteExterna;
+        }
+        .cabecera{
+            background-color: lightgray;
+        }
+        .logo{
+            background-image: url('./assets/iconos/Dropshipping.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100px;
+        } 
+        .nav a{
+            margin-left: 10px;
+            text-decoration: none;
+        }
+        .subtitulo{
+            text-align: center;
+            margin-top: 50px;
+        } 
+        .contenido{
+            text-align: center;
+            margin-top: 50px;
+        } 
+        .footer{
+            text-align: center;
+            background-color: lightgray;
+            margin-top: 100px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        function guardarEnLocal() {
+            var nombreGuardado = document.getElementById('nombre').value;
+            localStorage.nombre = nombreGuardado;
+            var correoGuardado = document.getElementById('correo').value;
+            localStorage.correo = correoGuardado;
+        }
+    </script>
+    <script>
+        function validar() {
+            let nombre = document.getElementById('nombre').value;
+            let correo = document.getElementById('correo').value;
+ 
+            let errores = [];
+
+            if (!validarNombre(nombre)) {
+                errores.push("El campo Nombre debe tener nombre y apellido.");
+                document.getElementById('nombre').value = '';
+            }
+
+            if (!validarEmail(correo)) {
+                errores.push("El campo Correo debe cumplir las reglas de formación de direcciones de correo electrónico.");
+                document.getElementById('correo').value = '';
+            }
+
+            if (errores.length === 0) {
+                alert('¡Envío ejecutado correctamente!');
+                return true;
+            } else {
+                alert('Errores:\n' + errores.join('\n'));
+                return false;
+            }
+        }
+
+        function validarNombre(nombre) {
+            let exp = /^(.+\s.+)$/;
+            return exp.test(nombre);
+        }
+
+        function validarEmail(correo) {
+            let exp = /^(.+\@.+\..+)$/;
+            return exp.test(correo);
+        }
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row cabecera sticky-top">
+            <div class="col-sm-1 logo">
+            </div>
+            <div class="col-sm-2">
+                <h4>Dropshipping</h4>
+            </div>
+            <div class="col-sm-6 nav">
+                <a href="./DIW2EVQUIROSBENABDESLAM.html">Inicio</a>
+                <a href="./DIW2EVQUIROSBENABDESLAM_sobre.html">Sobre nosotros</a>
+                <a href="./DIW2EVQUIROSBENABDESLAM_contacto.html">Contacto</a>
+            </div>
+            <div class="col-sm-3">
+                <input type="text" placeholder="Buscar">
+                <input type="submit" value="Search">
+            </div>
+        </div>
+        <div class="container">
+            <div class="row subtitulo">
+                <div class="col-sm-12">
+                    <h4>Contacto</h4>
+                    <p>Delivery sin cargo, averigua para pedidos especiales</p>
+                </div>
+            </div>
+            <div class="row contenido">
+                <div class="col-sm-6">
+                    <h6>Email</h6>
+                    <p>personaldelivery@gmail.com</p>
+                    <h6>Telefono</h6>
+                    <p>+34 91 474 437</p>
+                    <h6>Horario de atención</h6>
+                    <p>Lun a Vie de 10:00 a 18:00 hs.</p>
+                    <p>Sábados de 10:00 a 13:00 hs.</p>
+                </div>
+                <div class="col-sm-6">
+                    <form action="/action_page.php" method="get" onsubmit="return validar()">
+                        <label for="nombre">Nombre</label><br>
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre Apellido"><br><br>
+                        <label for="correo">Email</label><br>
+                        <input type="email" id="correo" name="correo"><br><br>
+                        <label for="mensaje">Mensaje</label><br>
+                        <textarea id="mensaje" cols="20" rows="5"></textarea><br><br>
+                        <input type="submit" class="enviar" value="Enviar" onclick="guardarEnLocal()">
+                    </form>
+                </div>
+            </div>
+            <div class="row footer">
+                <div class="col-sm-12">
+                    <h4>Productos Dropshipping</h4>
+                    <p>Siguenos en nuestras redes <img src="./assets/iconos/facebook.png" alt="icon-facebook" class="icon-facebook" width="20px" height="20px"> -
+                        <img src="./assets/iconos/instagram.png" alt="icon-instagram" class="icon-instagram" width="20px" height="20px"> - 
+                        <img src="./assets/iconos/x.png" alt="icon-x" class="icon-x" width="20px" height="20px"> - 
+                        <img src="./assets/iconos/whatsapp.png" alt="icon-whatsapp" class="icon-whatsapp" width="20px" height="20px"> 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
