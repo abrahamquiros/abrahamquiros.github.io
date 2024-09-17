@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./ico/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <title>Runaway!</title>
+    <style>
+        .row div[class*='col'] {padding: 10px;}
+        .cabecera{
+            background-color: rgb(3, 96, 152);
+        }
+        h2{
+            color: white;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-weight: bold;
+            text-align: center;
+        }
+        .icon-img {
+            width: 20px;
+            height: auto;
+            margin-left: 2px;
+            margin-right: 2px;
+        }
+        .nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .nav a{
+            text-decoration: none;
+            margin-left: 10px;
+            color: rgb(149, 202, 234);
+        }
+        .nav .dropdown-item {
+            color: rgb(149, 202, 234);
+            margin-left: 0px;
+        }
+        .btn-group-search p {
+            display: inline-block;
+            vertical-align: middle;
+            margin-bottom: 0; /* Evita el espacio extra debajo del párrafo */
+        }
+
+        .btn-group-search .lupa {
+            vertical-align: middle;
+        }
+        .dropdown-menu {
+            padding: 10px;
+            background-color: rgb(3, 96, 152);
+        }
+        .subcabecera{
+            background-color: rgb(170, 214, 250);
+            height: 500px; 
+        }
+        /* .imagenCentral{
+            display: block;
+            margin: 0 auto;
+        } */
+        .imagenCentral{
+            background-image: url("./img/imagen_central.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: relative;   
+        }
+        .imagenCentral .dentro{
+            background-image: url("./img/runner.png");
+            background-repeat: no-repeat;
+            background-position: left top;
+            position: absolute;
+            top: 10px; 
+            left: 10px; 
+            width: 150px; 
+            height: 150px;
+        }
+        /* Nuevos estilos para las imágenes en el carrusel */
+        .cards-wrapper {
+            display: flex;
+            justify-content: space-around; /* Ajusta según tus necesidades de espacio entre las imágenes */
+        }
+
+        .card {
+            flex: 0 0 auto;
+            width: 20%; /* Ajusta según tus necesidades de tamaño de imagen */
+        }
+        
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+        }
+        .formulario{
+          text-align: center;
+          background-color: rgb(214, 229, 240);
+          color: rgb(3, 96, 152);
+          margin-bottom: 20px;
+        }
+        .footerFinal{
+            background-color: rgb(216, 233, 244);
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#nbc').hover(
+                function() {
+                    $(this).attr('src', $(this).data('hover'));
+                },
+                function() {
+                    $(this).attr('src', $(this).data('original'));
+                }
+            );
+            $('#cycleops').hover(
+                function() {
+                    $(this).attr('src', $(this).data('hover'));
+                },
+                function() {
+                    $(this).attr('src', $(this).data('original'));
+                }
+            );
+            $('#usa').hover(
+                function() {
+                    $(this).attr('src', $(this).data('hover'));
+                },
+                function() {
+                    $(this).attr('src', $(this).data('original'));
+                }
+            );
+            $('#nyrr').hover(
+                function() {
+                    $(this).attr('src', $(this).data('hover'));
+                },
+                function() {
+                    $(this).attr('src', $(this).data('original'));
+                }
+            );
+            $('#shape').hover(
+                function() {
+                    $(this).attr('src', $(this).data('hover'));
+                },
+                function() {
+                    $(this).attr('src', $(this).data('original'));
+                }
+            );
+            $('#pumpone').hover(
+                function() {
+                    $(this).attr('src', $(this).data('hover'));
+                },
+                function() {
+                    $(this).attr('src', $(this).data('original'));
+                }
+            );
+        });
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row cabecera sticky-top">
+            <div class="col-1">
+            </div>
+            <div class="col-2 logo">
+                <h2>run<img src="./ico/favicon.ico" alt="Icono" class="icon-img">away!</h2>
+            </div>
+            <div class="col-6 nav">
+                <!-- <a href="#">Home</a> -->
+                <div class="btn-group">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Home
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Dashboard</a>
+                        <a class="dropdown-item" href="#">My Workout</a>
+                        <a class="dropdown-item" href="#">My Maps</a>
+                        <a class="dropdown-item" href="#">My courses</a>
+                        <a class="dropdown-item" href="#">My nutrition</a>
+                        <a class="dropdown-item" href="#">Activity feed</a>
+                    </div>
+                </div>      
+                <!-- <a href="#">Mapas</a> -->
+                <div class="btn-group">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Mapas
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Explore</a>
+                        <a class="dropdown-item" href="#">Find a map</a>
+                        <a class="dropdown-item" href="#">Courses</a>
+                        <a class="dropdown-item" href="#">Create a map</a>
+                    </div>
+                </div>
+                <!-- <a href="#">Entretenimiento</a> -->
+                <div class="btn-group">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Entretenimiento
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Explore</a>
+                        <a class="dropdown-item" href="#">Challenges</a>
+                        <a class="dropdown-item" href="#">Activities</a>
+                        <a class="dropdown-item" href="#">Training plan</a>
+                        <a class="dropdown-item" href="#">Trainner/Classes</a>
+                    </div>
+                </div>          
+                <!-- <a href="#">Comunidad</a> -->
+                <div class="btn-group">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Comunidad
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Explore</a>
+                        <a class="dropdown-item" href="#">Groups Events</a>
+                        <a class="dropdown-item" href="#">Members</a>
+                        <a class="dropdown-item" href="#">Stories & Photos</a>
+                        <a class="dropdown-item" href="#">Fittest of the Fit</a>
+                    </div>
+                </div>  
+                <!-- <a href="#">Herramientas</a> -->
+                <div class="btn-group">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Herramientas
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Mobile App</a>
+                        <a class="dropdown-item" href="#">Calculators</a>
+                    </div>
+                </div> 
+                <!-- <a href="#">Tienda</a> -->
+                <div class="btn-group">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tienda
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Shop the Store</a>
+                        <a class="dropdown-item" href="#">Go Pro</a>
+                    </div>
+                </div>                             
+            </div>
+            <div class="col-3">
+                <div class="btn-group-search">
+                    <p>
+                        <img src="./img/facebook.png" alt="icon-facebook" class="icon-facebook"> login/registro
+                    </p>
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="./ico/icon_search_header.png" alt="lupa" class="lupa">
+                    </a>
+                    <div class="dropdown-menu">
+                        <input type="text" placeholder="Buscar en el sitio">
+                        <input type="submit" value="Buscar">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row subcabecera">
+            <div class="col-2">
+            </div>
+            <div class="col-8 imagenCentral">
+                <div class="dentro">
+                
+                </div>  
+            </div>
+            <div class="col-2">
+            </div>
+        </div>
+        <div class="row cuerpoCabecera">
+            <div class="col-2">
+            </div>
+            <div class="col-8 contenido">
+                <div class="formulario">
+                    <form action="index.html" method='get' class="formularioContenido">
+                        <label for="quiero">QUIERO:</label>
+                            <select name="quiero" id="quiero" required>
+                              <option value="encontrar" selected="selected">Encontrar una carrera</option>
+                              <option value="mapa">Trazar el mapa de mi carrera</option>
+                              <option value="lugar">Encontrar un lugar para comer</option>
+                              <option value="comenzar">Comenzar un plan de entrenamiento</option>
+                              <option value="participar">Participar en un desafío</option>
+                              <option value="unirme">Unirme a un grupo de corredores</option>
+                            </select>
+                            <label for="pais">EN:</label>
+                            <input type="text" name="pais" id="pais" value="España">
+                            <input type="button" name="ir" id="ir" value="Ir">
+                    </form>
+                </div>
+            </div>
+            <div class="col-2">
+            </div>
+        </div>
+        <div class="row cuerpoContenido">
+            <div class="col-2">
+            </div>
+            <div class="col-8 contenido">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="cards-wrapper">
+                                <div class="card">
+                                    <div class="image-wrapper">
+                                        <img src="./img/carrusel/1.png" alt="...">
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="image-wrapper">
+                                        <img src="./img/carrusel/2.png" alt="...">
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="image-wrapper">
+                                        <img src="./img/carrusel/3.png" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="cards-wrapper">
+                                <div class="card">
+                                <div class="image-wrapper">
+                                    <img src="./img/carrusel/4.png" alt="...">
+                                </div>
+                                </div>
+                                <div class="card">
+                                <div class="image-wrapper">
+                                    <img src="./img/carrusel/5.png" alt="...">
+                                </div>
+                                </div>
+                                <div class="card">
+                                <div class="image-wrapper">
+                                    <img src="./img/carrusel/6.png" alt="...">
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="cards-wrapper">
+                                <div class="card">
+                                    <div class="image-wrapper">
+                                        <img src="./img/carrusel/7.png" alt="...">
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="image-wrapper">
+                                        <img src="./img/carrusel/8.png" alt="...">
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="image-wrapper">
+                                        <img src="./img/carrusel/9.png" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-2">
+            </div>
+        </div>
+        <div class="row cuerpoPie">
+            <div class="col-2">
+            </div>
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-2"><img id="nbc" src="./img/nbc_bn.jpg" alt="" data-original="./img/nbc_bn.jpg" data-hover="./img/nbc.jpg"></div>
+                    <div class="col-2 cycleops"><img id="cycleops" src="./img/cycleops_bn.jpg" alt="" data-original="./img/cycleops_bn.jpg" data-hover="./img/cycleops.jpg"></div>
+                    <div class="col-2"><img id="usa" src="./img/usa_bn.jpg" alt="" data-original="./img/usa_bn.jpg" data-hover="./img/usa.jpg"></div>
+                    <div class="col-2 nyrr"><img id="nyrr" src="./img/nyrr_bn.jpg" alt="" data-original="./img/nyrr_bn.jpg" data-hover="./img/nyrr.jpg"></div>
+                    <div class="col-2 shape"><img id="shape" src="./img/shape_bn.jpg" alt="" data-original="./img/shape_bn.jpg" data-hover="./img/shape.jpg"></div>
+                    <div class="col-2 pumpone"><img id="pumpone" src="./img/pumpone_bn.jpg" alt="" data-original="./img/pumpone_bn.jpg" data-hover="./img/pumpone.jpg"></div>
+                </div>
+            </div>
+            <div class="col-2">
+            </div>
+        </div>
+        <div class="row footer">
+            <div class="col-2">
+            </div>
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-3">
+                        <h5>¿NECESITAS AYUDA?:</h5>
+                        <p>Plantea una pregunta</p>
+                        <p>Desarrollador/API</p>
+                        <p>Login/registro</p>
+                    </div>
+                    <div class="col-3">
+                        <h5>EMPRESA:</h5>
+                        <p>Acerca de nosotros</p>
+                        <p>Publicidad</p>
+                        <p>Trabaja con nostros</p>
+                        <p>Runaway para empresas</p>
+                    </div>
+                    <div class="col-3">
+                        <h5>LOS SITIOS DE runaway:</h5>
+                        <p>runaway Fitness</p>
+                        <p>runaway Ride</p>
+                        <p>runaway Walk</p>
+                        <p>runaway Hike</p>
+                    </div>
+                    <div class="col-3">
+                        <h5>SÍGUENOS EN:</h5>
+                        <p><img src="./img/facebook.jpg" alt="iconoFb" class="iconoFb">Facebook</p>
+                        <p><img src="./img/twitter.jpg" alt="iconoTw" class="iconoTw">@runaway</p>
+                        <p><img src="./img/app1.jpg" alt="iconoApp" class="iconoApp">Get the App</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+            </div>
+        </div>
+        <div class="row footerFinal">
+            <div class="col-2">
+            </div>
+            <div class="col-7">
+                <p>Runaway! Inc: &copy;Runaway Fitness, Inc All Rights Reseverd 2005-2024</p>
+            </div>
+            <div class="col-3">
+                <p><a href="#">Privacy Policy</a> | <a href="#">Term of use</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
