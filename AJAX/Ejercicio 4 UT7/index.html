@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(255, 207, 0);
+        }
+        h1{
+            color: rgb(70, 118, 128);
+        }
+        p{
+            font-weight: bold;
+        }
+        .marco{
+            border: 3px solid black;
+            text-align: center;
+            width: 20%;
+            padding: 5px;
+        }
+        #contenedor {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        #info {
+            width: 45%; 
+        }
+        #introducirSaldo {
+            width: 45%; 
+        }
+        #alta{
+            border: 3px solid black;
+            text-align: center;
+            width: 40%;
+            padding: 5px;
+            padding-left: 100px;
+        }
+        .titulo3{
+            text-decoration: underline;
+        }
+        #nuevaClave{
+            border: 3px solid black;
+            text-align: center;
+            width: 40%;
+            padding: 5px;
+            padding-left: 100px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#enviar").click(mirarDatos);
+            $("#ok").click(ingresarCantidad); 
+            $("#introducirSaldo").hide(); 
+            $("#registrar").click(insertarDatos);  
+            $("#enviar2").click(cambioClave);
+
+            // Tasa variable de MegaCoins
+            // var mcElement = document.getElementById("mc");
+            // if (mcElement) {
+            //     var tasa = Math.floor(Math.random() * (600 - 400 + 1)) + 400;
+            //     mcElement.textContent = tasa;
+            // } else {
+            //     console.error("No se encontró el elemento con el ID 'mc'");
+            // }
+
+            var tasa = Math.floor(Math.random() * (600 - 400 + 1)) + 400;
+            document.getElementById("mc").textContent = tasa;
+
+            // Número visitas de la página
+            if (localStorage.veces === undefined) {
+                localStorage.veces = 1;
+            } else {
+                localStorage.veces = Number(localStorage.veces) + 1;
+            }
+            document.getElementById("veces").textContent = localStorage.veces;
+
+            // APARTADO A
+            function comprobarCorreo() {
+                var validarCorreo = /^(.+\@.+\..+)$/;  
+                var correo = document.getElementById('correo').value;
+                
+                if (correo === "") {
+                    return false;
+                } else {
+                    if (validarCorreo.test(correo)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+
+            function comprobarClave() {
+                var validarClave = /\d{8}/;
+                var clave = document.getElementById('clave').value;
+                if (clave == "") {
+                    return false;
+                } else {
+                    if (validarClave.test(clave)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+
+            function mirarDatos() {
+                if (comprobarCorreo()) {
+                    if (comprobarClave()) {
+                        var correo = document.getElementById('correo').value;
+                        var clave = document.getElementById('clave').value;
+                        var peticion = $.ajax({
+                            url: "mostrarSaldo.php",
+                            type: "POST",
+                            async: true,
+                            data: {
+                                correo: correo,
+                                clave: clave
+                            },
+                            success: function(data) {
+                                if (data) {
+                                    $("#info").html(data);
+                                    $("#introducirSaldo").show();
+                                } else {
+                                    alert(data);
+                                }
+                            }
+                        })
+                    } else {
+                        alert("Incorrecta la clave");
+                    }
+                } else {
+                    alert("Incorrecto el correo");
+                }
+            }
+
+            // APARTADO B
+            function comprobarCantidad() {
+                var validarCantidad = /^([0-9])+$/; //+ para requerir al menos un dígito 
+                var cantidad = document.getElementById('cantidad').value;
+                
+                if (cantidad == "") {
+                    return false;
+                } else {
+                    if (validarCantidad.test(cantidad)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+
+            function ingresarCantidad() {
+                if (comprobarCantidad()) {
+                    var correo = document.getElementById('correo').value;
+                    var cantidad = document.getElementById('cantidad').value;
+                    var mc = document.getElementById('mc').textContent;
+                    var peticion = $.ajax({
+                        url: "introducirSaldo.php",
+                        type: "POST",
+                        async: true,
+                        data: {
+                            correo: correo,
+                            cantidad: cantidad,
+                            mc: mc // Incluir mc en los datos enviados
+                        },
+                        success: function(data) {
+                            if (data) {
+                                $("#introducirSaldo").html(data);
+                            } else {
+                                alert(data);
+                            }
+                        }
+                    })
+                } else {
+                    alert("Incorrecta la cantidad a ingresar");
+                }
+                
+            }
+
+            // APARTADO C
+            function comprobarCorreo2() {
+                var validarCorreo2 = /^(.+\@.+\..+)$/;  
+                var correo2 = document.getElementById('correo2').value;
+                
+                if (correo2 === "") {
+                    return false;
+                } else {
+                    if (validarCorreo2.test(correo2)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+
+            function comprobarClave2() {
+                var validarClave2 = /\d{8}/;
+                var clave2 = document.getElementById('clave2').value;
+                if (clave2 == "") {
+                    return false;
+                } else {
+                    if (validarClave2.test(clave2)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+
+            function comprobarPregunta() {
+                var validarPregunta = /^[A-Za-záéíóúüñÁÉÍÓÚÜÑ']+$/;
+                var pregunta = document.getElementById('pregunta').value;
+                if (pregunta == "") {
+                    return false;
+                } else {
+                    if (validarPregunta.test(pregunta)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                var validarRespuesta = /^[A-Za-záéíóúüñÁÉÍÓÚÜÑ']+$/;
+                var respuesta = document.getElementById('respuesta').value;
+                if (respuesta == "") {
+                    return false;
+                } else {
+                    if (validarRespuesta.test(respuesta)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+
+            function comprobarNombre() {
+                var validarNombre = /^[A-Za-záéíóúüñÁÉÍÓÚÜÑ']+(\s[A-Za-záéíóúüñÁÉÍÓÚÜÑ']+){0,3}$/; // nombre de 0 a 3 espacios
+                var nombre = document.getElementById('nombre').value;
+                if (nombre == "") {
+                    return false;
+                } else {
+                    if (validarNombre.test(nombre)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+
+            function validaFecha() {
+                var fecha = document.getElementById("fecha").value;
+                
+                if (!isNaN(Date.parse(fecha))) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            function comprobarPais() {
+                var validarPais = /^[A-Za-záéíóúüñÁÉÍÓÚÜÑ']+(\s+[A-Za-záéíóúüñÁÉÍÓÚÜÑ']+)*$/; // pais de 0 a n espacios
+                var pais = document.getElementById('pais').value;
+                if (pais == "") {
+                    return false;
+                } else {
+                    if (validarPais.test(pais)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+
+            function comprobarIngreso() {
+                var validarIngreso = /^([0-9])+$/; //+ para requerir al menos un dígito 
+                var ingreso = document.getElementById('ingreso').value;
+                
+                if (ingreso == "") {
+                    return false;
+                } else {
+                    if (validarIngreso.test(ingreso)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+
+            function insertarDatos() {
+                if (comprobarCorreo2()) {
+                    if (comprobarClave2()) {
+                        if (comprobarPregunta()) {
+                            if (comprobarRespuesta()) {
+                                if (comprobarNombre()) {
+                                    if (validaFecha()) {
+                                        if (comprobarPais()) {
+                                            if (comprobarIngreso()) {
+                                                var correo2 = document.getElementById('correo2').value;
+                                                var clave2 = document.getElementById('clave2').value;
+                                                var pregunta = document.getElementById('pregunta').value;
+                                                var respuesta = document.getElementById('respuesta').value;
+                                                var nombre = document.getElementById('nombre').value;
+                                                var fecha = document.getElementById('fecha').value;
+                                                var pais = document.getElementById('pais').value;
+                                                var ingreso = document.getElementById('ingreso').value;
+                                                var mc = document.getElementById('mc').textContent; // Obtener el valor de mc
+                                                var peticion = $.ajax({
+                                                    url: "alta.php",
+                                                    type: "POST",
+                                                    async: true,
+                                                    data: {
+                                                        correo2: correo2,
+                                                        clave2: clave2,
+                                                        pregunta: pregunta,
+                                                        respuesta: respuesta,
+                                                        nombre: nombre,
+                                                        fecha: fecha,
+                                                        pais: pais,
+                                                        ingreso: ingreso,
+                                                        mc: mc
+                                                    },
+                                                    success: function(data) {
+                                                        if (data) {
+                                                            $("#alta").html(data);
+                                                        } else {
+                                                            alert(data);
+                                                        }
+                                                    }
+                                                }) 
+
+                                            } else {
+                                                alert("Incorrecto el ingreso");
+                                            } 
+
+                                        } else {
+                                            alert("Incorrecto el pais");
+                                        }  
+
+                                    } else {
+                                        alert("Incorrecta la fecha");
+                                    }  
+
+                                } else {
+                                    alert("Incorrecta el nombre");
+                                }  
+
+                            } else {
+                                alert("Incorrecta la respuesta");
+                            }  
+                            
+                        } else {
+                            alert("Incorrecta la pregunta");
+                        }               
+                        
+                    } else {
+                        alert("Incorrecta la clave");
+                    }
+                } else {
+                    alert("Incorrecto el email");
+                }    
+            }
+
+            // APARTADO D
+            function comprobarCorreo3() {
+                var validarCorreo3 = /^(.+\@.+\..+)$/;  
+                var correo3 = document.getElementById('correo3').value;
+                
+                if (correo3 === "") {
+                    return false;
+                } else {
+                    if (validarCorreo3.test(correo3)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+
+            function validaFecha2() {
+                var fecha2 = document.getElementById("fecha2").value;
+                
+                if (!isNaN(Date.parse(fecha2))) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            function cambioClave() {
+                if (comprobarCorreo3()) {
+                    if (validaFecha2()) {
+                        var correo3 = document.getElementById('correo3').value;
+                        var fecha2 = document.getElementById('fecha2').value;
+                        var peticion = $.ajax({
+                            url: "cambioClave.php",
+                            type: "POST",
+                            async: true,
+                            data: {
+                                correo3: correo3,
+                                fecha2: fecha2
+                            },
+                            success: function(data) {
+                                if (data) {
+                                    $("#mostrarClave").html(data);
+                                } else {
+                                    alert(data);
+                                }
+                            }
+                        })
+                    } else {
+                        alert("Incorrecto el email");
+                    }
+                } else {
+                    alert("Incorrecta la fecha");
+                }
+            }
+            
+        });
+    </script>
+</head>
+<body>
+    <h1>Simulacion de un monedero MegaCoins</h1>
+    <p>Para operar por favor identifÍquese</p>
+    <div id="formulario">
+        <table>
+            <tr>
+                <td>
+                    <label for="correo">Correo Electrónico</label>                   
+                </td>
+                <td>
+                    <label for="clave">Password:</label>
+                </td>
+            </tr>
+            <tr>     
+                <td>
+                    <input type="email" id="correo" name="correo">
+                </td>
+                <td>
+                    <input type="text" id="clave" name="clave">
+                </td>
+                <td>
+                    <input type="button" id="enviar" name="enviar" value="Enviar">
+                </td>
+            </tr>      
+        </table> 
+    </div>
+    <p class="marco">Cotización del MegaCoin: <span id="mc"></span> MC / 1$</p>
+    <!-- <p>Cotización del MegaCoin: <input type="hidden" id="mc" value=""> MC / 1$</p> -->
+    <!-- <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+        var tasa = Math.floor(Math.random() * (600 - 400 + 1)) + 400;
+        document.getElementById("mc").value = tasa;
+    }); -->
+    </script>
+    <div id="contenedor">
+        <div id="info">
+            <table>
+                <tr>
+                    <td>
+                        <p>Si no dispone cuenta en MegaCoins, haga click <a href="#">aquí</a></p>                   
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Ha visitado esta pagina: <span id="veces"></span> veces</p>                   
+                    </td>
+                    <!-- <td>
+                        <p>Cotización del MegaCoin: <span id="mc"></span> MC / 1$</p>
+                        <p>Cotización del MegaCoin: <input type="hidden" id="mc" value=""> MC / 1$</p>
+                        <script type="text/javascript">
+                            document.addEventListener("DOMContentLoaded", function() {
+                                var tasa = Math.floor(Math.random() * (600 - 400 + 1)) + 400;
+                                document.getElementById("mc").value = tasa;
+                            });
+                        </script>
+                    </td> -->
+                </tr>
+            </table>    
+        </div>
+        <div id="introducirSaldo">
+            <label for="cantidad">Introduzca cantidad a ingresar:</label><br><br>
+            <input type="text" id="cantidad" name="cantidad"><br><br>
+            <input type="button" id="ok" name="ok" value="Ok">
+        </div>
+    </div>
+    <p>Complete la informacion de registro</p>
+    <div id="alta">
+        <table>
+            <tr>
+                <td class="margen">
+                    <label for="correo2">Email:</label>                   
+                </td>
+
+                <td>
+                    <label for="clave2">Clave:</label>
+                </td>
+            </tr>
+            <tr>     
+                <td>
+                    <input type="email" id="correo2" name="correo2">
+                </td>
+                
+                <td>
+                    <input type="text" id="clave2" name="clave2">
+                </td>
+            </tr> 
+            <tr>
+                <td>
+                    <label for="pregunta">Pregunta:</label>                   
+                </td>
+                
+                <td>
+                    <label for="respuesta">Respuesta:</label>
+                </td>
+            </tr>
+            <tr>     
+                <td>
+                    <input type="text" id="pregunta" name="pregunta">
+                </td>
+                
+                <td>
+                    <input type="text" id="respuesta" name="respuesta">
+                </td>
+            </tr> 
+            <tr>
+                <td>
+                    <label for="nombre">Nombre:</label>                   
+                </td>
+                
+                <td>
+                    <label for="fecha">Fecha Nacimiento:</label>
+                </td>
+            </tr>
+            <tr>     
+                <td>
+                    <input type="text" id="nombre" name="nombre">
+                </td>
+                
+                <td>
+                    <input type="date" id="fecha" name="fecha">
+                </td>
+            </tr> 
+            <tr>
+                <td>
+                    <label for="pais">País:</label>                   
+                </td>
+                
+                <td>
+                    <label for="ingreso">Ingreso $:</label>
+                </td>
+            </tr>
+            <tr>     
+                <td>
+                    <input type="text" id="pais" name="pais">
+                </td>
+                
+                <td>
+                    <input type="text" id="ingreso" name="ingreso">
+                </td>
+            </tr>          
+        </table> 
+        <input type="submit" id="registrar" name="registrar" value="Registrarse">
+        <input type="reset" id="borrar" name="borrar" value="Limpiar">
+    </div>
+    <p class="titulo3">Para pedir una nueva clave:</p>
+    <div id="nuevaClave">
+        <table>
+            <tr>
+                <td>
+                    <label for="correo3">Correo Electrónico:</label>                   
+                </td>
+
+                <td>
+                    <label for="fecha2">Fecha de Nacimiento:</label>
+                </td>
+            </tr>
+            <tr>     
+                <td>
+                    <input type="email" id="correo3" name="correo3">
+                </td>
+                
+                <td>
+                    <input type="date" id="fecha2" name="fecha2">
+                </td>
+                <td>
+                    <input type="submit" id="enviar2" name="enviar2" value="Enviar">
+                </td>
+            </tr> 
+        </table>    
+    </div>
+    <div id="mostrarClave">
+
+    </div>
+</body>
+</html>
